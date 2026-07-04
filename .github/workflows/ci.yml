@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["**/*.md", "docs/**", ".vscode/**", "LICENSE"]
+  pull_request:
+    paths-ignore: ["**/*.md", "docs/**", ".vscode/**", "LICENSE"]
+
+# 同一ブランチで古い実行が走っていればキャンセル（GitHub Actions 分の節約 = コスト削減）
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# 最小権限（セキュリティ）
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      # ---- Node.js（package-lock.json があるときだけ実行）----
+      - name: Setup Node.js
+        if: hashFiles('**/package-lock.json') != ''
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Node - install / lint / test / build
+        if: hashFiles('**/package-lock.json') != ''
+        run: |
+          npm ci
+          npm run lint --if-present
+          npm test --if-present
+          npm run build --if-present
+
+      # ---- Python（requirements.txt があるときだけ実行）----
+      - name: Setup Python
+        if: hashFiles('**/requirements.txt') != ''
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Python - install / test
+        if: hashFiles('**/requirements.txt') != ''
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+          pytest -q
+
+      # 他のスタック（Go / Java / .NET など）は上記に倣ってステップを追加してください。
+      - name: No build steps detected
+        if: hashFiles('**/package-lock.json') == '' && hashFiles('**/requirements.txt') == ''
+        run: echo "ビルド対象が未検出です。プロジェクトのスタックに合わせて CI を設定してください（README 参照）。"

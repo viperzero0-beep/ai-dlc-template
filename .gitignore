@@ -1,0 +1,55 @@
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+
+# === Logs / temp ===
+*.log
+logs/
+tmp/
+.cache/
+
+# === Node.js ===
+node_modules/
+dist/
+build/
+coverage/
+.npm/
+*.tsbuildinfo
+
+# === Python ===
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# === Java / JVM ===
+target/
+*.class
+
+# === Go ===
+bin/
+
+# === 環境変数・シークレット（コミット厳禁） ===
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# === IaC ===
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+cdk.out/
+
+# === AI-DLC ローカル作業メモ（永続コンテキストは docs/ai-dlc/context にコミットする） ===
+.ai-scratch/

@@ -1,0 +1,26 @@
+# EditorConfig — エディタ間で一貫したコードスタイルを保つ（https://editorconfig.org）
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Markdown は行末スペースが改行の意味を持つため除外
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefile はタブ必須
+[Makefile]
+indent_style = tab
+
+# Python は慣習的に 4 スペース
+[*.py]
+indent_size = 4
+
+# Go はタブ
+[*.go]
+indent_style = tab

@@ -1,0 +1,8 @@
+{
+  // この AI-DLC テンプレートを最大限活用するための推奨拡張機能。
+  // ワークスペースを開くと VS Code がインストールを提案します。
+  "recommendations": [
+    "github.copilot", // GitHub Copilot（コード補完）
+    "github.copilot-chat" // GitHub Copilot Chat（/inception などのプロンプト・エージェント）
+  ]
+}

@@ -1,0 +1,78 @@
+name: AI-DLC Context Check
+
+# AI-DLC の原則「決定と成果物を永続化する」を促すためのチェック。
+# コード変更があるのに docs/ai-dlc/context/ の更新がない場合、PR に注意コメントを残します。
+# （マージはブロックしません。文化の定着が目的です）
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: context-check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  context-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pull_number = context.payload.pull_request.number;
+            const marker = '<!-- ai-dlc-context-check -->';
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner, repo, pull_number,
+            });
+
+            const isNonCode = (f) =>
+              f.filename.endsWith('.md') ||
+              f.filename.startsWith('docs/') ||
+              f.filename.startsWith('.github/') ||
+              f.filename.startsWith('.vscode/');
+
+            const codeChanged = files.some((f) => !isNonCode(f));
+            const contextChanged = files.some((f) =>
+              f.filename.startsWith('docs/ai-dlc/context/')
+            );
+
+            let body;
+            if (codeChanged && !contextChanged) {
+              body = [
+                marker,
+                '### ⚠️ 永続コンテキストの更新が見当たりません',
+                '',
+                'コードの変更がありますが、`docs/ai-dlc/context/` の更新がありません。',
+                'AI-DLC では決定・設計・要件をリポジトリに残すことが重要です。',
+                '',
+                '- 要件の変更 → `docs/ai-dlc/context/requirements/`',
+                '- 設計の変更 → `docs/ai-dlc/context/architecture/`',
+                '- 重要な意思決定 → `docs/ai-dlc/context/decisions/`（`/adr`）',
+                '',
+                '_（軽微な変更で不要な場合は、このコメントは無視して構いません）_',
+              ].join('\n');
+            } else {
+              body = [
+                marker,
+                '### ✅ AI-DLC コンテキストチェック',
+                '',
+                '永続コンテキストの更新を確認、またはコンテキスト更新が不要な変更です。',
+              ].join('\n');
+            }
+
+            // 既存のマーカーコメントがあれば更新、なければ作成（コメントの乱立を防ぐ）
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number: pull_number,
+            });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: pull_number, body });
+            }

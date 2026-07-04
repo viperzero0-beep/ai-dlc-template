@@ -1,0 +1,28 @@
+# Dependabot — 依存関係の更新・脆弱性修正を自動で PR にする（security 規約に対応）。
+# まずこのテンプレートが確実に使う GitHub Actions を対象にしています。
+# 言語スタックを追加したら npm / pip などのブロックを有効化してください。
+version: 2
+updates:
+  # GitHub Actions（.github/workflows/ のアクションを最新・安全に保つ）
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+
+  # --- 以下はプロジェクトのスタックに合わせて有効化 ---
+  # - package-ecosystem: "npm"        # package-lock.json がある場合
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #   open-pull-requests-limit: 5
+  #   labels: ["dependencies"]
+
+  # - package-ecosystem: "pip"        # requirements.txt がある場合
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #   open-pull-requests-limit: 5
+  #   labels: ["dependencies"]

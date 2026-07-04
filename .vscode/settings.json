@@ -1,0 +1,39 @@
+{
+  // === GitHub Copilot / AI-DLC 設定 ===
+  // copilot-instructions.md と .instructions.md を常に適用する
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+
+  // プロンプトファイル（.github/prompts/*.prompt.md）を有効化
+  "chat.promptFiles": true,
+
+  // 追加のカスタマイズ配置場所（既定の .github 配下に加えて明示）
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "chat.promptFilesLocations": {
+    ".github/prompts": true
+  },
+  "chat.modeFilesLocations": {
+    ".github/agents": true
+  },
+
+  // 新規チャットで AI-DLC の各フェーズプロンプトを推奨表示
+  "chat.promptFilesRecommendations": {
+    "inception": "新機能・要件定義を始めるとき（着想フェーズ）",
+    "construction": "設計・実装・テストを行うとき（構築フェーズ）",
+    "operations": "デプロイ・IaC・運用を行うとき（運用フェーズ）",
+    "bolt-plan": "短い作業サイクル（Bolt）を計画するとき",
+    "adr": "重要な技術的意思決定を記録するとき"
+  },
+
+  // === コスト・安全のための既定 ===
+  // ターミナル等の自動承認は無効（人間の監督を担保）
+  "chat.tools.terminal.autoApprove": false,
+
+  // 保存時整形（言語拡張に応じて調整）
+  "editor.formatOnSave": true,
+
+  "files.exclude": {
+    "**/.ai-scratch": true
+  }
+}

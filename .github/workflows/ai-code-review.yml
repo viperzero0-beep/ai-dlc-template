@@ -1,0 +1,55 @@
+name: AI-DLC PR Review Assist
+
+# PR が開かれたら AI/人間レビュー用のチェックリストを 1 度だけ自動コメントし、
+# GitHub Copilot code review を促します。LLM を呼ばないため追加コストはかかりません。
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+    paths-ignore: ["**/*.md", "docs/**"]
+
+concurrency:
+  group: pr-review-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review-checklist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const marker = '<!-- ai-dlc-review-checklist -->';
+
+            // 既にコメント済みなら何もしない（ノイズ・実行コスト削減）
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number,
+            });
+            if (comments.some((c) => c.body && c.body.includes(marker))) return;
+
+            const body = [
+              marker,
+              '## AI-DLC レビュー チェックリスト',
+              '',
+              '> このPRをマージする前に、人間のレビュアーと AI で以下を確認してください。',
+              '',
+              '### AI レビューの依頼方法',
+              '- 右側の **Reviewers** から **Copilot** を選び、自動コードレビューを依頼できます。',
+              '- 組織/リポジトリ設定で *Copilot code review* を有効化すると自動化できます。',
+              '',
+              '### 確認観点',
+              '- [ ] **要件との整合**: `docs/ai-dlc/context/requirements/` の受入基準を満たす',
+              '- [ ] **設計の記録**: 重要な技術判断が ADR (`docs/ai-dlc/context/decisions/`) に残っている',
+              '- [ ] **テスト**: 重要パス・異常系がテストされ、CI が緑',
+              '- [ ] **セキュリティ**: 入力検証・シークレット非混入・OWASP Top 10',
+              '- [ ] **コスト**: 過剰設計や無駄な計算/クエリがない',
+              '- [ ] **永続コンテキスト**: 必要な設計/決定がリポジトリに保存されている',
+            ].join('\n');
+
+            await github.rest.issues.createComment({ owner, repo, issue_number, body });
