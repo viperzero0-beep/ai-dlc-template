@@ -1,37 +1,37 @@
-# Construction（構築）フェーズ
+﻿# Construction・域ｧ狗ｯ会ｼ峨ヵ繧ｧ繝ｼ繧ｺ
 
-検証済みの要件から、**論理アーキテクチャ・ドメインモデル・コード・テスト**を作ります。
+讀懆ｨｼ貂医∩縺ｮ隕∽ｻｶ縺九ｉ縲・*隲也炊繧｢繝ｼ繧ｭ繝・け繝√Ε繝ｻ繝峨Γ繧､繝ｳ繝｢繝・Ν繝ｻ繧ｳ繝ｼ繝峨・繝・せ繝・*繧剃ｽ懊ｊ縺ｾ縺吶・
 
-- 起動: `/construction`（計画は `/bolt-plan`、意思決定は `/adr`）
-- 担当エージェント: [Construction エージェント](../../.github/agents/construction.agent.md)
-- 出力先: コード本体 + `docs/ai-dlc/context/architecture/<topic>.md`
+- 襍ｷ蜍・ `/construction`・郁ｨ育判縺ｯ `/bolt-plan`縲∵э諤晄ｱｺ螳壹・ `/adr`・・
+- 諡・ｽ薙お繝ｼ繧ｸ繧ｧ繝ｳ繝・ [Construction 繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝・(../../.github/agents/construction.agent.md)
+- 蜃ｺ蜉帛・: 繧ｳ繝ｼ繝画悽菴・+ `docs/ai-dlc/context/architecture/<topic>.md`
 
-## 入力 → 出力
+## 蜈･蜉・竊・蜃ｺ蜉・
 
-| 入力                       | 出力                          |
+| 蜈･蜉・                      | 蜃ｺ蜉・                         |
 | -------------------------- | ----------------------------- |
-| 要件（Inception の成果物） | 設計、実装コード、テスト、ADR |
+| 隕∽ｻｶ・・nception 縺ｮ謌先棡迚ｩ・・| 險ｭ險医∝ｮ溯｣・さ繝ｼ繝峨√ユ繧ｹ繝医、DR |
 
-## 進め方（Plan → Ask → Confirm → Execute）
+## 騾ｲ繧∵婿・・lan 竊・Ask 竊・Confirm 竊・Execute・・
 
-1. **Plan**: 既存コンテキストと関連コードを読み、アーキテクチャ・影響範囲・テスト方針を提案。
-2. **Ask（Mob Construction）**: アーキ選択・データモデル・依存ライブラリのトレードオフを選択肢付きで確認。
-3. **Confirm**: 設計が承認されるまで本実装に入らない。重要判断は `/adr` で記録。
-4. **Execute**: コードとテストをセットで実装。CI を緑にし、設計を `architecture/` に保存。
+1. **Plan**: 譌｢蟄倥さ繝ｳ繝・く繧ｹ繝医→髢｢騾｣繧ｳ繝ｼ繝峨ｒ隱ｭ縺ｿ縲√い繝ｼ繧ｭ繝・け繝√Ε繝ｻ蠖ｱ髻ｿ遽・峇繝ｻ繝・せ繝域婿驥昴ｒ謠先｡医・
+2. **Ask・・ob Construction・・*: 繧｢繝ｼ繧ｭ驕ｸ謚槭・繝・・繧ｿ繝｢繝・Ν繝ｻ萓晏ｭ倥Λ繧､繝悶Λ繝ｪ縺ｮ繝医Ξ繝ｼ繝峨が繝輔ｒ驕ｸ謚櫁い莉倥″縺ｧ遒ｺ隱阪・
+3. **Confirm**: 險ｭ險医′謇ｿ隱阪＆繧後ｋ縺ｾ縺ｧ譛ｬ螳溯｣・↓蜈･繧峨↑縺・る㍾隕∝愛譁ｭ縺ｯ `/adr` 縺ｧ險倬鹸縲・
+4. **Execute**: 繧ｳ繝ｼ繝峨→繝・せ繝医ｒ繧ｻ繝・ヨ縺ｧ螳溯｣・・I 繧堤ｷ代↓縺励∬ｨｭ險医ｒ `architecture/` 縺ｫ菫晏ｭ倥・
 
-## 規約（自動で参照されます）
+## 隕冗ｴ・ｼ郁・蜍輔〒蜿ら・縺輔ｌ縺ｾ縺呻ｼ・
 
-- [コードスタイル](../../.github/instructions/code-style.instructions.md)
-- [テスト](../../.github/instructions/testing.instructions.md)
-- [セキュリティ](../../.github/instructions/security.instructions.md)
+- [繧ｳ繝ｼ繝峨せ繧ｿ繧､繝ｫ](../../.github/instructions/code-style.instructions.md)
+- [繝・せ繝・(../../.github/instructions/testing.instructions.md)
+- [繧ｻ繧ｭ繝･繝ｪ繝・ぅ](../../.github/instructions/security.instructions.md)
 
-## 完了の目安
+## 螳御ｺ・・逶ｮ螳・
 
-- [ ] 受入基準を満たす実装
-- [ ] 重要パス・異常系のテストがあり CI が緑
-- [ ] セキュリティ確認済み（OWASP Top 10）
-- [ ] 重要な意思決定が ADR 化されている
-- [ ] 設計が `docs/ai-dlc/context/architecture/` に保存されている
-- [ ] PR を作成し、人間 + AI のレビューを通過
+- [ ] 蜿怜・蝓ｺ貅悶ｒ貅縺溘☆螳溯｣・
+- [ ] 驥崎ｦ√ヱ繧ｹ繝ｻ逡ｰ蟶ｸ邉ｻ縺ｮ繝・せ繝医′縺ゅｊ CI 縺檎ｷ・
+- [ ] 繧ｻ繧ｭ繝･繝ｪ繝・ぅ遒ｺ隱肴ｸ医∩・・WASP Top 10・・
+- [ ] 驥崎ｦ√↑諢乗晄ｱｺ螳壹′ ADR 蛹悶＆繧後※縺・ｋ
+- [ ] 險ｭ險医′ `docs/ai-dlc/context/architecture/` 縺ｫ菫晏ｭ倥＆繧後※縺・ｋ
+- [ ] PR 繧剃ｽ懈・縺励∽ｺｺ髢・+ AI 縺ｮ繝ｬ繝薙Η繝ｼ繧帝夐℃
 
-→ 次は [Operations](./03-operations.md)。Bolt 完了後は `/retro` で振り返り。
+竊・谺｡縺ｯ [Operations](./03-operations.md)縲・olt 螳御ｺ・ｾ後・ `/retro` 縺ｧ謖ｯ繧願ｿ斐ｊ縲・

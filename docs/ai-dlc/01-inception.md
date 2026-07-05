@@ -1,38 +1,38 @@
-# Inception（着想）フェーズ
+﻿# Inception・育捩諠ｳ・峨ヵ繧ｧ繝ｼ繧ｺ
 
-ビジネス意図を、検証済みの**要件・ユーザーストーリー・受入基準・Unit of Work** に変換します。
+繝薙ず繝阪せ諢丞峙繧偵∵､懆ｨｼ貂医∩縺ｮ**隕∽ｻｶ繝ｻ繝ｦ繝ｼ繧ｶ繝ｼ繧ｹ繝医・繝ｪ繝ｼ繝ｻ蜿怜・蝓ｺ貅悶・Unit of Work** 縺ｫ螟画鋤縺励∪縺吶・
 
-- 起動: `/inception`
-- 担当エージェント: [Inception エージェント](../../.github/agents/inception.agent.md)
-- 出力先: `docs/ai-dlc/context/requirements/<unit-of-work>.md`
+- 襍ｷ蜍・ `/inception`
+- 諡・ｽ薙お繝ｼ繧ｸ繧ｧ繝ｳ繝・ [Inception 繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝・(../../.github/agents/inception.agent.md)
+- 蜃ｺ蜉帛・: `docs/ai-dlc/context/requirements/<unit-of-work>.md`
 
-## 入力 → 出力
+## 蜈･蜉・竊・蜃ｺ蜉・
 
-| 入力                         | 出力                                                                |
+| 蜈･蜉・                        | 蜃ｺ蜉・                                                               |
 | ---------------------------- | ------------------------------------------------------------------- |
-| ビジネス意図・課題・アイデア | 要件、ユーザーストーリー、受入基準、Unit of Work 分解、リスク・前提 |
+| 繝薙ず繝阪せ諢丞峙繝ｻ隱ｲ鬘後・繧｢繧､繝・い | 隕∽ｻｶ縲√Θ繝ｼ繧ｶ繝ｼ繧ｹ繝医・繝ｪ繝ｼ縲∝女蜈･蝓ｺ貅悶ゞnit of Work 蛻・ｧ｣縲√Μ繧ｹ繧ｯ繝ｻ蜑肴署 |
 
-## 進め方（Plan → Ask → Confirm → Execute）
+## 騾ｲ繧∵婿・・lan 竊・Ask 竊・Confirm 竊・Execute・・
 
-1. **Plan**: AI が意図の理解を要約し、作る成果物を提示。
-2. **Ask（Mob Elaboration）**: AI が不明点・前提・スコープ・非機能要件・成功指標を質問。チーム全員で回答・検証。
-3. **Confirm**: ストーリー / 受入基準（Given-When-Then）/ Unit of Work 分解を人間が承認。
-4. **Execute**: 承認内容を `requirements/<unit-of-work>.md` に保存。Construction への引き継ぎ事項を明記。
+1. **Plan**: AI 縺梧э蝗ｳ縺ｮ逅・ｧ｣繧定ｦ∫ｴ・＠縲∽ｽ懊ｋ謌先棡迚ｩ繧呈署遉ｺ縲・
+2. **Ask・・ob Elaboration・・*: AI 縺御ｸ肴・轤ｹ繝ｻ蜑肴署繝ｻ繧ｹ繧ｳ繝ｼ繝励・髱樊ｩ溯・隕∽ｻｶ繝ｻ謌仙粥謖・ｨ吶ｒ雉ｪ蝠上ゅメ繝ｼ繝蜈ｨ蜩｡縺ｧ蝗樒ｭ斐・讀懆ｨｼ縲・
+3. **Confirm**: 繧ｹ繝医・繝ｪ繝ｼ / 蜿怜・蝓ｺ貅厄ｼ・iven-When-Then・・ Unit of Work 蛻・ｧ｣繧剃ｺｺ髢薙′謇ｿ隱阪・
+4. **Execute**: 謇ｿ隱榊・螳ｹ繧・`requirements/<unit-of-work>.md` 縺ｫ菫晏ｭ倥・onstruction 縺ｸ縺ｮ蠑輔″邯吶℃莠矩・ｒ譏手ｨ倥・
 
-## 良い受入基準の例
+## 濶ｯ縺・女蜈･蝓ｺ貅悶・萓・
 
 ```
-Given ログイン済みのユーザーが
-When カートの「購入」を押すと
-Then 在庫を確認し、確保できれば注文を確定し、確認メールを送る
+Given 繝ｭ繧ｰ繧､繝ｳ貂医∩縺ｮ繝ｦ繝ｼ繧ｶ繝ｼ縺・
+When 繧ｫ繝ｼ繝医・縲瑚ｳｼ蜈･縲阪ｒ謚ｼ縺吶→
+Then 蝨ｨ蠎ｫ繧堤｢ｺ隱阪＠縲∫｢ｺ菫昴〒縺阪ｌ縺ｰ豕ｨ譁・ｒ遒ｺ螳壹＠縲∫｢ｺ隱阪Γ繝ｼ繝ｫ繧帝√ｋ
 ```
 
-## 完了の目安（Definition of Ready for Construction）
+## 螳御ｺ・・逶ｮ螳会ｼ・efinition of Ready for Construction・・
 
-- [ ] スコープ内/外が明確
-- [ ] 各ストーリーに受入基準がある
-- [ ] Unit of Work が Bolt に分解されている
-- [ ] 重要な前提・リスク・未解決の意思決定が列挙されている
-- [ ] 要件が `docs/ai-dlc/context/requirements/` に保存されている
+- [ ] 繧ｹ繧ｳ繝ｼ繝怜・/螟悶′譏守｢ｺ
+- [ ] 蜷・せ繝医・繝ｪ繝ｼ縺ｫ蜿怜・蝓ｺ貅悶′縺ゅｋ
+- [ ] Unit of Work 縺・Bolt 縺ｫ蛻・ｧ｣縺輔ｌ縺ｦ縺・ｋ
+- [ ] 驥崎ｦ√↑蜑肴署繝ｻ繝ｪ繧ｹ繧ｯ繝ｻ譛ｪ隗｣豎ｺ縺ｮ諢乗晄ｱｺ螳壹′蛻玲嫌縺輔ｌ縺ｦ縺・ｋ
+- [ ] 隕∽ｻｶ縺・`docs/ai-dlc/context/requirements/` 縺ｫ菫晏ｭ倥＆繧後※縺・ｋ
 
-→ 次は [Construction](./02-construction.md)（`/bolt-plan` で計画 → `/construction` で実装）。
+竊・谺｡縺ｯ [Construction](./02-construction.md)・・/bolt-plan` 縺ｧ險育判 竊・`/construction` 縺ｧ螳溯｣・ｼ峨・
