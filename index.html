@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小遣い帳</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="app-shell">
+        <header class="hero">
+            <h1>小遣い帳</h1>
+            <p>日々の収支をすぐに記録して、残高を確認できます。</p>
+        </header>
+
+        <section class="card form-card">
+            <h2>取引を追加</h2>
+            <form id="transaction-form">
+                <label>
+                    日付
+                    <input id="transaction-date" name="date" type="date" required />
+                </label>
+                <label>
+                    種類
+                    <select id="transaction-type" name="type" required>
+                        <option value="income">収入</option>
+                        <option value="expense">支出</option>
+                    </select>
+                </label>
+                <label>
+                    金額
+                    <input id="transaction-amount" name="amount" type="number" min="0" step="1" required />
+                </label>
+                <label>
+                    カテゴリ
+                    <input id="transaction-category" name="category" type="text" placeholder="例: 食費" required />
+                </label>
+                <label>
+                    メモ
+                    <input id="transaction-memo" name="memo" type="text" placeholder="内容を入力" />
+                </label>
+                <button type="submit">保存</button>
+            </form>
+        </section>
+
+        <section class="card summary-card">
+            <h2>今月の概要</h2>
+            <div class="summary-grid">
+                <div>
+                    <span class="label">収入</span>
+                    <strong id="total-income">¥0</strong>
+                </div>
+                <div>
+                    <span class="label">支出</span>
+                    <strong id="total-expense">¥0</strong>
+                </div>
+                <div>
+                    <span class="label">残高</span>
+                    <strong id="balance">¥0</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="card list-card">
+            <div class="list-header">
+                <h2>詳細</h2>
+                <label class="month-picker">
+                    表示月
+                    <input id="month-filter" type="month" />
+                </label>
+            </div>
+            <div class="tabs">
+                <button class="tab-button active" data-tab="transactions">取引一覧</button>
+                <button class="tab-button" data-tab="categories">カテゴリ別集計</button>
+            </div>
+            <div id="transactions-tab" class="tab-content active">
+                <div class="monthly-summary">
+                    <span>月次集計</span>
+                    <strong id="monthly-summary">0円</strong>
+                </div>
+                <ul id="transaction-list"></ul>
+            </div>
+            <div id="categories-tab" class="tab-content">
+                <ul id="category-list"></ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="src/allowance-app.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
