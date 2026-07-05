@@ -1,4 +1,4 @@
-﻿# EditorConfig 窶・繧ｨ繝・ぅ繧ｿ髢薙〒荳雋ｫ縺励◆繧ｳ繝ｼ繝峨せ繧ｿ繧､繝ｫ繧剃ｿ昴▽・・ttps://editorconfig.org・・
+# EditorConfig — エディタ間で一貫したコードスタイルを保つ（https://editorconfig.org）
 root = true
 
 [*]
@@ -9,18 +9,18 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-# Markdown 縺ｯ陦梧忰繧ｹ繝壹・繧ｹ縺梧隼陦後・諢丞袖繧呈戟縺､縺溘ａ髯､螟・
+# Markdown は行末スペースが改行の意味を持つため除外
 [*.md]
 trim_trailing_whitespace = false
 
-# Makefile 縺ｯ繧ｿ繝門ｿ・・
+# Makefile はタブ必須
 [Makefile]
 indent_style = tab
 
-# Python 縺ｯ諷｣鄙堤噪縺ｫ 4 繧ｹ繝壹・繧ｹ
+# Python は慣習的に 4 スペース
 [*.py]
 indent_size = 4
 
-# Go 縺ｯ繧ｿ繝・
+# Go はタブ
 [*.go]
 indent_style = tab
