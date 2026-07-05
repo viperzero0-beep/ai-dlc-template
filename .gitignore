@@ -1,4 +1,4 @@
-﻿# === OS / Editor ===
+# === OS / Editor ===
 .DS_Store
 Thumbs.db
 *.swp
@@ -35,7 +35,7 @@ target/
 # === Go ===
 bin/
 
-# === 迺ｰ蠅・､画焚繝ｻ繧ｷ繝ｼ繧ｯ繝ｬ繝・ヨ・医さ繝溘ャ繝亥宍遖・ｼ・===
+# === 環境変数・シークレット（コミット厳禁） ===
 .env
 .env.*
 !.env.example
@@ -51,5 +51,5 @@ secrets/
 !*.tfvars.example
 cdk.out/
 
-# === AI-DLC 繝ｭ繝ｼ繧ｫ繝ｫ菴懈･ｭ繝｡繝｢・域ｰｸ邯壹さ繝ｳ繝・く繧ｹ繝医・ docs/ai-dlc/context 縺ｫ繧ｳ繝溘ャ繝医☆繧具ｼ・===
+# === AI-DLC ローカル作業メモ（永続コンテキストは docs/ai-dlc/context にコミットする） ===
 .ai-scratch/
