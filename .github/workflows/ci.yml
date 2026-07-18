@@ -26,7 +26,7 @@ jobs:
       # ---- Node.js（package-lock.json があるときだけ実行）----
       - name: Setup Node.js
         if: hashFiles('**/package-lock.json') != ''
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: "npm"
